@@ -5,20 +5,20 @@
 #include <stdlib.h>
 #include "../linearalgebra.h"
 
-
+//Emin
 /* ----------------------- gramSchmidt ----------------------- */
-/*  Given a matrix A of dimension m by n, this algorithm 
-    computes a QR decomposition of A, where Q is a unitary 
+/*  Given a matrix A of dimension m by n, this algorithm
+    computes a QR decomposition of A, where Q is a unitary
     m by n matrix and R is a n by n upper triangular matrix
-    and A = QR.    
-    
+    and A = QR.
+
     Input variables:
         a   : pointer to array of arrays, the ith array of
-                which should correspond to the ith column of the 
-                matrix A. During the algorithm, the columns of Q 
+                which should correspond to the ith column of the
+                matrix A. During the algorithm, the columns of Q
                 will replace the columns of A.
-        r   : pointer to array of arrays in which the ith 
-                column of the upper triangular matrix R will be 
+        r   : pointer to array of arrays in which the ith
+                column of the upper triangular matrix R will be
                 stored in the ith subarray of r.
         m   : number of columns in A.
         n   : number of rows in A.
@@ -68,8 +68,8 @@ void gramSchmidt (double ** a, double ** r, int m, int n, bool full) {
         }
     }
 
-    /* if full QR factorization requested, we choose remaining 
-       columns of Q so that the m columns of Q form an 
+    /* if full QR factorization requested, we choose remaining
+       columns of Q so that the m columns of Q form an
        orthonormal set                                          */
     if(full) {
         for(; i < m; i++) {
@@ -77,11 +77,11 @@ void gramSchmidt (double ** a, double ** r, int m, int n, bool full) {
                     a[i][j] = -a[0][i] * a[0][j];
                 }
                 a[i][i] += 1;
-    
+
                 for(j = 1; j < i; j++) {
                     scalar_sub(a[j], a[j][i], m, a[i]);
                 }
-    
+
                 anorm = norm(a[i], m);
                 scalar_div(a[i], anorm, m, a[i]);
         }
@@ -191,7 +191,7 @@ int main () {
             printf("q_%i * q_%i = %lg\n", i + 1, j + 1, x);
         }
     }
-    
+
     /* free memory */
     for(i = 0; i < n; i++) {
         delete[] a[i];
@@ -200,7 +200,7 @@ int main () {
     for(; i < q_n; i++) {
         delete[] a[i];
     }
-    delete[] a;  
+    delete[] a;
     delete[] r;
 
     return 0;       // exit main
